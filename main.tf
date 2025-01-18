@@ -8,4 +8,4 @@ resource "aws_instance" "example" {
   tags = {
     Name = "GitHubAction-Terraform-EC2"
   }
-} .
+} 
