@@ -1,0 +1,38 @@
+name: Deploy EC2 using Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: Apply Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.0
+
+    - name: Initialize Terraform
+      run: terraform init
+
+    - name: Format Terraform
+      run: terraform fmt -check
+
+    - name: Validate Terraform
+      run: terraform validate
+
+    - name: Plan Terraform
+      run: terraform plan
+
+    - name: Apply Terraform
+      env:
+        AWS_ACCESS_KEY_ID: AKIA2UC3CNBIYLEOOL5L
+        AWS_SECRET_ACCESS_KEY: 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
+      run: terraform apply -auto-approve
